@@ -6,7 +6,7 @@ import { IngredientsService } from "./ingredients.service";
 
 @Injectable() // Decorador para poder agregar un servicio dentro de otro
 export class RecipeService {
-    recipeSelected = new EventEmitter<Recipe>();
+    //recipeSelected = new EventEmitter<Recipe>();
     
     private recipes: Recipe[] = [
         new Recipe('A test recipe 1', 'This is a simply test ', 'http://sevilla.abc.es/contenidopromocionado/wp-content/uploads/sites/2/2017/09/1996x1206-hamburguesas.jpg', 
@@ -32,7 +32,11 @@ export class RecipeService {
     constructor(private ingredientsService: IngredientsService){}
 
       getRecipes(){
-          return this.recipes.slice();
+        return this.recipes.slice();
+      }
+
+      getRecipe(index: number){
+        return this.recipes[index];
       }
 
       //Metodo para invocar desde la vista
