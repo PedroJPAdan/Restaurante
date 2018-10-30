@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { IngredientsService } from '../../services/ingredients.service';
 import { Ingredient } from '../../shared/ingredient.model';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   //@ViewChild('nameInput') nameInputRef: ElementRef;
   //@ViewChild('amountInput') amountInputRef: ElementRef;
@@ -31,6 +31,10 @@ export class ShoppingEditComponent implements OnInit {
         amount: this.editedItem.amount
       });
     });
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   onAddItem(form: NgForm){
