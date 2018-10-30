@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 
 export class IngredientsService {
     ingredientsChanged = new EventEmitter<Ingredient[]>();
+    startedChanged = new Subject<Ingredient[]>();
     startedEditing = new Subject<number>(); //indicar la edicion de algun ingrediente
     
     private ingredients: Ingredient [] = [
