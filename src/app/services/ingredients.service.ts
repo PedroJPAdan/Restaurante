@@ -3,8 +3,8 @@ import { EventEmitter } from "@angular/core";
 import { Subject } from "rxjs";
 
 export class IngredientsService {
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
-    startedChanged = new Subject<Ingredient[]>();
+    //ingredientsChanged = new EventEmitter<Ingredient[]>();
+    ingredientsChanged = new Subject<Ingredient[]>();
     startedEditing = new Subject<number>(); //indicar la edicion de algun ingrediente
     
     private ingredients: Ingredient [] = [
@@ -23,12 +23,12 @@ export class IngredientsService {
 
       addIngredient(ingredient: Ingredient){
           this.ingredients.push(ingredient);
-          this.ingredientsChanged.emit(this.ingredients.slice());
+          this.ingredientsChanged.next(this.ingredients.slice());
       }
 
       updateIngredient(index: number, ingredient: Ingredient){
         this.ingredients[index] = ingredient;
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
       }
 
       //Una vez obtenidos se deben guardar en el arreglo, con un foreach donde se obtiene el objeto con una constante i
@@ -42,6 +42,6 @@ export class IngredientsService {
             }
         }
         //Una vez esto se volvera a ejecutar el evento con el emitter
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
       }
 }
