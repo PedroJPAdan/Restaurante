@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,7 +31,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
   imports: [
     BrowserModule,
     AppRoutingModule, //para declarar rutas
-    FormsModule //Para trabajar con obtejos de tipo formulario, extraer valores de input
+    FormsModule,   //Para trabajar con obtejos de tipo formulario, extraer valores de input
+    ReactiveFormsModule //Para trabajar de forma dinamica con los formularios
   ],
   providers: [IngredientsService],
   bootstrap: [AppComponent]
