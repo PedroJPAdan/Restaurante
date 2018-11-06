@@ -31,6 +31,11 @@ export class IngredientsService {
         this.ingredientsChanged.next(this.ingredients.slice());
       }
 
+      deleteIngredient(index: number){
+        this.ingredients.splice(index,1) ;
+        this.ingredientsChanged.next(this.ingredients.slice());
+      }
+
       //Una vez obtenidos se deben guardar en el arreglo, con un foreach donde se obtiene el objeto con una constante i
       addIngredients(auxIngredients: Ingredient[]){
         for(const i of auxIngredients){
