@@ -2,11 +2,13 @@ import { Recipe } from "../recipes/recipe.model";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
 import { IngredientsService } from "./ingredients.service";
+import { Subject } from "rxjs";
 
 
 @Injectable() // Decorador para poder agregar un servicio dentro de otro
 export class RecipeService {
     //recipeSelected = new EventEmitter<Recipe>();
+    recipeChanged = new Subject<Recipe[]>();
     
     private recipes: Recipe[] = [
         new Recipe('A test recipe 1', 'This is a simply test ', 'http://sevilla.abc.es/contenidopromocionado/wp-content/uploads/sites/2/2017/09/1996x1206-hamburguesas.jpg', 
@@ -46,9 +48,11 @@ export class RecipeService {
 
       addRecipe(recipe: Recipe){
         this.recipes.push(recipe);
+        this.recipeChanged.next(this.recipes.slice());
       }
 
       updateRecipe(index: number, recipe: Recipe){
         this.recipes[index] = recipe;
+        this.recipeChanged.next(this.recipes.slice());
       }
 }

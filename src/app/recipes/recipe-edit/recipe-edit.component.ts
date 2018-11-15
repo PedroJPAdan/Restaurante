@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators, NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Recipe } from '../recipe.model';
 
@@ -14,6 +14,7 @@ export class RecipeEditComponent implements OnInit {
   id: number;
   editMode = false;
   recipeForm: FormGroup;
+  @ViewChild('f')slForm: NgForm;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
@@ -68,7 +69,18 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit(){
-    //const newRecipe = new Recipe(this.recipeForm);
-    console.log(this.recipeForm);
+    const recipe = this.recipeForm.value;
+    const newRecipe = new Recipe(recipe.name, recipe.description, recipe.imagePath, recipe.ingredients);
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id, newRecipe);
+    }else{
+      this.recipeService.addRecipe(newRecipe);
+    }
+    this.clear();
+  }
+  
+  clear(){
+    this.slForm.reset();
+    this.editMode = false;
   }
 }
