@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
-  //@Output() recipeWasSelected = new EventEmitter<Recipe>();
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
   recipes:Recipe[];
   private sure: Subscription;
@@ -28,10 +28,6 @@ export class RecipesListComponent implements OnInit {
 
   onNewRecipe(){
     this.router.navigate(['new'],{relativeTo: this.route}); //relativeTo para que concatene el 'new'
-  }
-
-  ngOnDestroy(){
-    this.sure.unsubscribe();
   }
 
 }

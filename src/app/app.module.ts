@@ -14,6 +14,7 @@ import { IngredientsService } from './services/ingredients.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeService } from './services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     FormsModule,   //Para trabajar con obtejos de tipo formulario, extraer valores de input
     ReactiveFormsModule //Para trabajar de forma dinamica con los formularios
   ],
-  providers: [IngredientsService],
+  providers: [IngredientsService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

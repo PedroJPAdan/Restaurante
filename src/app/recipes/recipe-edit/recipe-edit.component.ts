@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators, NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Recipe } from '../recipe.model';
@@ -16,11 +16,11 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
   @ViewChild('f')slForm: NgForm;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = /*convertir a numero +*/ +params['id'];
+      this.id = +params['id'];/*convertir a numero +*/ 
       this.editMode = params['id'] != null;
       this.initForm();
     });
@@ -48,14 +48,13 @@ export class RecipeEditComponent implements OnInit {
           }));
         }
       }
-
-      this.recipeForm = new FormGroup({
-        'name':new FormControl(recipeName, Validators.required),
-        'imagePath':new FormControl(recipeImgePath, Validators.required),
-        'description':new FormControl(recipeDescription, Validators.required),
-        'ingredients':ingredients
-      });
-    }  
+    } 
+    this.recipeForm = new FormGroup({
+      'name':new FormControl(recipeName, Validators.required),
+      'imagePath':new FormControl(recipeImgePath, Validators.required),
+      'description':new FormControl(recipeDescription, Validators.required),
+      'ingredients':ingredients
+    }); 
   }
 
   onAddIngredient(){
@@ -65,7 +64,7 @@ export class RecipeEditComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[1-9]+[0-9]*$/)
       ])
-    }));
+    }))
   }
 
   onSubmit(){
@@ -82,5 +81,13 @@ export class RecipeEditComponent implements OnInit {
   clear(){
     this.slForm.reset();
     this.editMode = false;
+  }
+
+  onDeleteIngredient(index: number){
+    (<FormArray>this.recipeForm.get("ingredients")).removeAt(index);
+  }
+
+  onCancel(){
+    this.router.navigate(['../'],{relativeTo:this.route});
   }
 }
