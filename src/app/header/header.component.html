@@ -1,21 +1,23 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a style="cursor: pointer;" class="navbar-brand">Recipes book</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a style= "cursor: pointer" class="navbar-brand">Recipies book</a>
   <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav">
-      <li class="nav-item"><a style="cursor: pointer;" class="nav-link" routerLink="/recipes">Recipies</a></li>
-      <li class="nav-item"><a style="cursor: pointer;" class="nav-link" routerLink="/shoppingList">Shoping List</a></li>
-      <li class="nav-item dropdown" >
-        <a href="" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+      <li class="nav-item"><a  class="nav-link" routerLink ="/recipes">Recipes</a></li>
+      <li class="nav-item"><a  class="nav-link" routerLink ="/shoppingList">Shopping List</a></li>
+      <li class="nav-item dropdown ">
+        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
           Manage
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="dropdown-item">Save Data</div>
-          <div class="dropdown-item">Fetch Data</div>
-        </div>
-      </li>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a  class="dropdown-item">Save Data</a>
+        <a  class="dropdown-item">Fetch Data</a>
+      </div>
+    </li>
+    <li class="nav-item"><a class="nav-link" *ngIf="!authService.isUserLoggedIn()" routerLink ="/login">Login</a></li>
+    <li class="nav-item"><a class="nav-link" *ngIf="authService.isUserLoggedIn()" routerLink ="/recipes" (click)="onLoguot()">Logout</a></li>
     </ul>
   </div>
 </nav>
