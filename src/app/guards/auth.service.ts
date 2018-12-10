@@ -9,7 +9,7 @@ export class AuthService {
   constructor() { }
 
   login(email: string, password : string): boolean{
-    if(email === "eney@gmail.com" && password ==="12345"){
+    if(email === "jesus@gmail.com" && password ==="12345"){
       this.isLoggedIn = true;
     }else{
       this.isLoggedIn = false;
